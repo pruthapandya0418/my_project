@@ -30,7 +30,7 @@ static lv_obj_t *tires[5];
 static lv_obj_t *car_tire_image;
 lv_timer_t *svg_timer;
 lv_timer_t *car_tier;
-static int pos_idx[5] = {4, 3, 2, 1, 0}; // Initial positions (left to right)
+static int pos_idx[5] = {4, 3, 2, 1, 0};
 
 static lv_point_t positions[5] = {
 		{680, 60},
@@ -55,11 +55,11 @@ static void hide_svg_screen_cb(lv_timer_t *timer) {
      svg_timer = NULL;
 }
 
-void create_ui(void) {
+void create_svg_scr(void) {
     // Set screen background to white
     lv_obj_set_style_bg_color(screen_svg, lv_color_white(), 0);
 
-    // Get tire dimensions (assuming all tires have the same size)
+    // Get tire dimensions
     tire_w = Tire1.header.w;
     tire_h = Tire1.header.h;
 
@@ -70,7 +70,7 @@ void create_ui(void) {
 
     // Create Car image at bottom center
     lv_obj_t *car_image = lv_img_create(screen_svg);
-    lv_img_set_src(car_image, &Car_Body); // Assuming Additional_Image is defined as LV_IMAGE_DECLARE(Additional_Image);
+    lv_img_set_src(car_image, &Car_Body);
     lv_obj_align(car_image, LV_ALIGN_BOTTOM_MID, 0, -50);
 
     car_tire_image = lv_img_create(screen_svg);
@@ -89,7 +89,7 @@ void create_ui(void) {
         lv_obj_set_pos(tires[i], px, py);
     }
 
-    // Create timer for animation every 1 seconds
+    // Create timer for animation every 0.5 seconds
     car_tier = lv_timer_create(shift_callback, 500, NULL);
 }
 
@@ -142,7 +142,7 @@ void button_svg_event_cb(lv_event_t * e)
     // Create new screen
     screen_svg = lv_obj_create(NULL);
     lv_scr_load(screen_svg);
-    create_ui();
+    create_svg_scr();
 
     svg_timer = lv_timer_create(hide_svg_screen_cb, 10000, NULL);
 }

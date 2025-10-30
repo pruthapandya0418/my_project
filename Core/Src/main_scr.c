@@ -12,10 +12,10 @@
 #include "math.h"
 #include "main_scr.h"
 #include "animation_main_scr.h"
-//#include "static_screen.h"
-//#include "2d_screen.h"
+#include "static_screen.h"
+#include "2d_screen.h"
 #include "svg_screen.h"
-//#include "text_scroll.h"
+#include "text_scroll.h"
 /*********************
  *      DEFINES
  *********************/
@@ -54,6 +54,7 @@ lv_obj_t *btn_text_scroll;
 lv_obj_t *btn_close;
 lv_obj_t *main_btn;
 lv_obj_t * label_center;
+
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
@@ -88,7 +89,6 @@ void menu_button_event_cb(lv_event_t * e) {
     menu_open = true;  // set flag
 }
 
-// NEW FUNCTION – hide all satellite buttons and show the centre text
 void main_scr_reset_menu(void)
 {
     /* Hide the 6 menu buttons */
@@ -105,6 +105,7 @@ void main_scr_reset_menu(void)
     /* Make sure the menu is considered closed */
     menu_open = false;
 }
+
 // Callback for when the close animation finishes
 static void close_anim_ready_cb(lv_anim_t * a)
 {
@@ -330,10 +331,10 @@ lv_obj_t * main_screen_start(void)
 
     lv_obj_add_event_cb(main_btn, menu_button_event_cb, LV_EVENT_CLICKED, NULL);
     lv_obj_add_event_cb(btn_close, close_button_event_cb, LV_EVENT_CLICKED, NULL);
-//    lv_obj_add_event_cb(btn_static, static_button_event_cb, LV_EVENT_CLICKED, NULL);
-//    lv_obj_add_event_cb(btn_2d, button_2d_event_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(btn_static, static_button_event_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(btn_2d, button_2d_event_cb, LV_EVENT_CLICKED, NULL);
     lv_obj_add_event_cb(btn_svg, button_svg_event_cb, LV_EVENT_CLICKED, NULL);
-//    lv_obj_add_event_cb(btn_text_scroll, text_scroll_button_event_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(btn_text_scroll, text_scroll_button_event_cb, LV_EVENT_CLICKED, NULL);
 
     LV_TRACE_OBJ_CREATE("finished");
 

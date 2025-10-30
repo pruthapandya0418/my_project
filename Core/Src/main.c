@@ -24,8 +24,8 @@
 /* USER CODE BEGIN Includes */
 #include "lvgl_port.h"
 #include "lvgl/lvgl.h"
-//#include "lvgl/demos/lv_demos.h"
-//#include "lvgl/examples/lv_examples.h"
+#include "lvgl/demos/lv_demos.h"
+#include "lvgl/examples/lv_examples.h"
 #include "main_scr.h"
 
 /* USER CODE END Includes */
@@ -141,13 +141,12 @@ int main(void)
   MX_I2C2_Init();
   MX_JPEG_Init();
   MX_USART1_UART_Init();
+
   /* USER CODE BEGIN 2 */
 
   lvgl_port_init();
-//  lv_demo_benchmark();
   lv_obj_t * out = main_screen_start();
   lv_scr_load(out);
-//  create_ui();
 
   /* USER CODE END 2 */
 

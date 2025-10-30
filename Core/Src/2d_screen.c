@@ -52,8 +52,8 @@ static void move_bottom_logos(int dx, int dy)
 // Timer callback to move bottom 3 logos
 static void bottom_move_cb(lv_timer_t *timer)
 {
-    const int step = 5; // pixels per update
-    const int max_distance = 10; // total distance to move in each direction
+    const int step = 5;
+    const int max_distance = 10;
     const int pause_duration = 15;
 
     static int move_count = 0;
@@ -66,7 +66,7 @@ static void bottom_move_cb(lv_timer_t *timer)
     	if (pause_count >= pause_duration) {
     		pausing = false;
     		pause_count = 0;
-    		move_phase = (move_phase + 1) % 4; // Next direction
+    		move_phase = (move_phase + 1) % 4;
     	}
     	return;
     }
@@ -122,7 +122,7 @@ static void bottom_move_cb(lv_timer_t *timer)
     }
 }
 
-// 2D Rotation + Motion Screen
+// 2D Screen
 void button_2d_event_cb(lv_event_t *e)
 {
     // Create new screen
@@ -174,14 +174,14 @@ void button_2d_event_cb(lv_event_t *e)
         lv_anim_init(&anim_rotate);
         lv_anim_set_var(&anim_rotate, top_logos[i]);
         lv_anim_set_exec_cb(&anim_rotate, rotate_exec_cb);
-        lv_anim_set_values(&anim_rotate, 0, 3600);   // 0° to 360° (in 0.1° units)
-        lv_anim_set_time(&anim_rotate, 3000);        // One full rotation = 3 sec
+        lv_anim_set_values(&anim_rotate, 0, 3600);
+        lv_anim_set_time(&anim_rotate, 3000);
         lv_anim_set_repeat_count(&anim_rotate, LV_ANIM_REPEAT_INFINITE);
         lv_anim_start(&anim_rotate);
     }
 
     // Create timer for bottom 3 logos movement
-    bottom_move_timer = lv_timer_create(bottom_move_cb, 20, NULL); // 20 FPS
+    bottom_move_timer = lv_timer_create(bottom_move_cb, 20, NULL);
     lv_timer_set_repeat_count(bottom_move_timer, LV_ANIM_REPEAT_INFINITE);
     close_timer = lv_timer_create(hide_2d_screen_cb, 10000, NULL);
 }
